@@ -12,8 +12,6 @@ const printBasicLayout = () => {
 
     let contentBox = document.querySelector(".content");
 
-    console.log(contentBox);
-
     let headerBox = document.createElement("div");
     headerBox.classList.add("header");
 
