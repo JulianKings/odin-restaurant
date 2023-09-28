@@ -151,10 +151,10 @@ body {
     padding: 1rem;
     color: white;
     border-radius: 0.4rem;
-    animation: slideIn 0.8s ease;
+    animation: showUp 0.8s ease;
 }
 
-@keyframes slideIn {
+@keyframes showUp {
     0% {
         opacity: 0;
         transform: translateY(20px);
