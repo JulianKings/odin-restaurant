@@ -1,5 +1,6 @@
 import MenuImage from '../images/menu.svg';
 import { printLayout as printHomeLayout } from './homeLayout';
+import { addListeners as addHomeListeners } from './homeLayout';
 import { printLayout as printMenuLayout } from './menuLayout';
 import { printLayout as printContactLayout } from './contactLayout';
 
@@ -57,13 +58,14 @@ const appendContent = (content) => {
     
     if(content === "linkHome")
     {
-        printHomeLayout();
+        printHomeLayout(mainContentBox);
+        addHomeListeners(_clickHandler);
     } else if(content === "linkMenu")
     {
-        printMenuLayout();
+        printMenuLayout(mainContentBox);
     } else if(content === "linkContact")
     {
-        printContactLayout();
+        printContactLayout(mainContentBox);
     }
 
     contentBox.appendChild(mainContentBox);
@@ -74,6 +76,9 @@ const _clickHandler = (event) => {
     let contentBox = document.querySelector(".content");
     // id selectors
     if(event.target.id === "linkHome")
+    {
+        _menuSelected(event.target);
+    } else if(event.target.id === "secondaryLinkMenu")
     {
         _menuSelected(event.target);
     } else if(event.target.id === "linkMenu")
@@ -89,6 +94,10 @@ const _clickHandler = (event) => {
     {
         event.stopPropagation();
         event.target.remove();
+        if(sidebarBackground !== null)
+        {
+            sidebarBackground = null;
+        }
 
         if(sidebarObject.classList.contains("slide-in"))
         {
@@ -155,21 +164,48 @@ const _clickHandler = (event) => {
 }
 
 const _menuSelected = (target) => {
-    if(!target.classList.contains("selected"))
+    if(target.id === "secondaryLinkMenu")
     {
-        let allMenus = document.querySelectorAll(".menuItem");
-        allMenus.forEach((menu) => {
-            if(menu.classList.contains("selected"))
-            {
-                menu.classList.remove("selected");
-            }
-        });
-
-        target.classList.add("selected");
-
-        currentlySelected = target.id;
+        currentlySelected = "linkMenu";
         // Handle layout modification logic
-        appendContent(target.id);
+        appendContent("linkMenu");
+
+    } else {
+        if(sidebarObject != null)
+        {
+            if(sidebarBackground != null)
+            {
+                sidebarBackground.remove();
+                sidebarBackground = null;
+            }
+
+            if(sidebarObject.classList.contains("slide-in"))
+            {
+                sidebarObject.classList.remove("slide-in");
+            }
+            sidebarObject.classList.add("slide-out");
+            setTimeout(() => {
+                sidebarObject.remove();     
+                sidebarObject = null;       
+            }, 375);
+            }
+
+        if(!target.classList.contains("selected"))
+        {
+            let allMenus = document.querySelectorAll(".menuItem");
+            allMenus.forEach((menu) => {
+                if(menu.classList.contains("selected"))
+                {
+                    menu.classList.remove("selected");
+                }
+            });
+
+            target.classList.add("selected");
+
+            currentlySelected = target.id;
+            // Handle layout modification logic
+            appendContent(target.id);
+        }
     }
 }
 
