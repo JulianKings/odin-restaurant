@@ -96,6 +96,10 @@ body {
     z-index: 2;
     display: flex;
     flex-direction: column;
+}
+
+.sidebarMenu .menuHolder
+{
     padding-top: 4rem;
 }
 

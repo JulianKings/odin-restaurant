@@ -123,6 +123,9 @@ const _clickHandler = (event) => {
             sidebarObject.classList.add("sidebarMenu");
             sidebarObject.classList.add("slide-in");
 
+            let sidebarMenuHolder = document.createElement("div");
+            sidebarMenuHolder.classList.add("menuHolder");
+
             let sidebarMenu = document.createElement("div");
             sidebarMenu.classList.add("menuItem");
             if(currentlySelected === "linkHome")
@@ -132,7 +135,7 @@ const _clickHandler = (event) => {
             sidebarMenu.textContent = "Home";
             sidebarMenu.setAttribute("id", "linkHome");
             sidebarMenu.addEventListener("click", _clickHandler);
-            sidebarObject.appendChild(sidebarMenu);
+            sidebarMenuHolder.appendChild(sidebarMenu);
 
             sidebarMenu = document.createElement("div");
             sidebarMenu.classList.add("menuItem");
@@ -143,7 +146,7 @@ const _clickHandler = (event) => {
             sidebarMenu.textContent = "Menu";
             sidebarMenu.setAttribute("id", "linkMenu");
             sidebarMenu.addEventListener("click", _clickHandler);
-            sidebarObject.appendChild(sidebarMenu);
+            sidebarMenuHolder.appendChild(sidebarMenu);
 
             sidebarMenu = document.createElement("div");
             sidebarMenu.classList.add("menuItem");
@@ -154,7 +157,9 @@ const _clickHandler = (event) => {
             sidebarMenu.textContent = "Contact Us";
             sidebarMenu.setAttribute("id", "linkContact");
             sidebarMenu.addEventListener("click", _clickHandler);
-            sidebarObject.appendChild(sidebarMenu);
+            sidebarMenuHolder.appendChild(sidebarMenu);
+
+            sidebarObject.appendChild(sidebarMenuHolder);
 
             contentBox.appendChild(sidebarObject);
         }
